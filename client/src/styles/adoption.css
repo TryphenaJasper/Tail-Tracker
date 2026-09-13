@@ -1,0 +1,315 @@
+/* =================================
+   ADOPTION PAGE
+================================= */
+
+.adoption-page {
+  min-height: 100vh;
+  background-color: #fff7fa;
+  color: #292329;
+}
+
+
+/* =================================
+   HEADER
+================================= */
+
+.adoption-header {
+  padding: 75px 10% 50px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 40px;
+
+  background-color: #fff7fa;
+}
+
+.adoption-heading {
+  max-width: 650px;
+}
+
+.adoption-tagline {
+  color: #d85b83;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 15px;
+}
+
+.adoption-heading h1 {
+  color: #292329;
+
+  font-size: clamp(3rem, 5vw, 4.5rem);
+
+  line-height: 1.05;
+
+  margin-bottom: 22px;
+}
+
+.adoption-heading h1 span {
+  color: #d85b83;
+}
+
+.adoption-heading > p:last-child {
+  max-width: 580px;
+
+  color: #695e64;
+
+  font-size: 1.05rem;
+
+  line-height: 1.7;
+}
+
+
+/* =================================
+   ADD ANIMAL BUTTON
+================================= */
+
+.add-animal-btn {
+  flex-shrink: 0;
+
+  padding: 14px 22px;
+
+  background-color: #d85b83;
+
+  color: #ffffff;
+
+  border-radius: 8px;
+
+  font-weight: 600;
+
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.add-animal-btn:hover {
+  background-color: #c94f77;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 20px rgba(216, 91, 131, 0.18);
+}
+
+
+/* =================================
+   SEARCH & FILTERS
+================================= */
+
+.adoption-filters {
+  margin: 0 10% 55px;
+
+  padding: 16px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  background-color: #ffffff;
+
+  border: 1px solid #f0dce3;
+
+  border-radius: 12px;
+
+  box-shadow: 0 5px 20px rgba(41, 35, 41, 0.04);
+}
+
+
+/* Search */
+
+.search-box {
+  flex: 1;
+
+  min-width: 250px;
+
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 15px;
+
+  background-color: #fff7fa;
+
+  border: 1px solid #f0dce3;
+
+  border-radius: 8px;
+}
+
+.search-box span {
+  font-size: 1rem;
+}
+
+.search-box input {
+  width: 100%;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #292329;
+
+  font-size: 0.95rem;
+}
+
+.search-box input::placeholder {
+  color: #a4939a;
+}
+
+
+/* Select filters */
+
+.adoption-filters select {
+  height: 48px;
+
+  padding: 0 35px 0 14px;
+
+  background-color: #fff7fa;
+
+  border: 1px solid #f0dce3;
+
+  border-radius: 8px;
+
+  color: #695e64;
+
+  outline: none;
+
+  cursor: pointer;
+}
+
+.adoption-filters select:focus {
+  border-color: #d85b83;
+}
+
+
+/* =================================
+   ANIMAL SECTION
+================================= */
+
+.animals-section {
+  padding: 0 10% 100px;
+}
+
+.animals-section-heading {
+  margin-bottom: 30px;
+}
+
+.animals-section-heading h2 {
+  color: #292329;
+
+  font-size: 1.8rem;
+
+  margin-bottom: 5px;
+}
+
+.animals-section-heading p {
+  color: #8b7d83;
+
+  font-size: 0.95rem;
+}
+
+
+/* =================================
+   ANIMAL LIST
+================================= */
+
+.animal-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 22px;
+}
+
+
+/* =================================
+   RESPONSIVE
+================================= */
+
+@media (max-width: 1000px) {
+
+  .adoption-header {
+    padding: 65px 7% 45px;
+  }
+
+  .adoption-filters {
+    margin-left: 7%;
+    margin-right: 7%;
+
+    flex-wrap: wrap;
+  }
+
+  .search-box {
+    flex-basis: 100%;
+  }
+
+  .adoption-filters select {
+    flex: 1;
+  }
+
+  .animals-section {
+    padding-left: 7%;
+    padding-right: 7%;
+  }
+}
+
+
+@media (max-width: 700px) {
+
+  .adoption-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    padding: 55px 6% 40px;
+  }
+
+  .adoption-heading h1 {
+    font-size: 3rem;
+  }
+
+  .add-animal-btn {
+    width: 100%;
+
+    text-align: center;
+  }
+
+  .adoption-filters {
+    margin-left: 6%;
+    margin-right: 6%;
+
+    padding: 12px;
+
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .search-box {
+    min-width: 0;
+
+    width: 100%;
+  }
+
+  .adoption-filters select {
+    width: 100%;
+  }
+
+  .animals-section {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+
+  .animals-section-heading h2 {
+    font-size: 1.5rem;
+  }
+}

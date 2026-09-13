@@ -1,0 +1,102 @@
+import { Link } from "react-router-dom";
+import "../styles/adoption.css";
+import AnimalList from "../components/AnimalList.jsx";
+
+function Adoption() {
+  return (
+    <div className="adoption-page">
+
+      {/* ================= HEADER ================= */}
+      <section className="adoption-header">
+
+        <div className="adoption-heading">
+          <p className="adoption-tagline">🐾 FIND A FRIEND</p>
+
+          <h1>
+            Find a loving
+            <br />
+            <span>companion.</span>
+          </h1>
+
+          <p>
+            Browse animals waiting for a loving family and give
+            them a second chance at a happy home.
+          </p>
+        </div>
+
+        <Link to="/adoption/add" className="add-animal-btn">
+          + Put an Animal for Adoption
+        </Link>
+
+      </section>
+
+
+      {/* ================= SEARCH & FILTERS ================= */}
+      <section className="adoption-filters">
+
+        <div className="search-box">
+          <span>🔍</span>
+
+          <input
+            type="text"
+            placeholder="Search by name, breed or location..."
+          />
+        </div>
+
+        <select defaultValue="">
+          <option value="" disabled>
+            Species
+          </option>
+          <option value="dog">Dog</option>
+          <option value="cat">Cat</option>
+        </select>
+
+        <select defaultValue="">
+          <option value="" disabled>
+            Age
+          </option>
+          <option value="young">Young</option>
+          <option value="adult">Adult</option>
+          <option value="senior">Senior</option>
+        </select>
+
+        <select defaultValue="">
+          <option value="" disabled>
+            Gender
+          </option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+
+        <select defaultValue="">
+          <option value="" disabled>
+            Location
+          </option>
+          <option value="chennai">Chennai</option>
+          <option value="coimbatore">Coimbatore</option>
+          <option value="madurai">Madurai</option>
+        </select>
+
+      </section>
+
+
+      {/* ================= ANIMAL LIST ================= */}
+      <section className="animals-section">
+
+        <div className="animals-section-heading">
+          <h2>Animals looking for a home</h2>
+
+          <p>
+            Every adoption is a chance to change a life.
+          </p>
+        </div>
+
+        <AnimalList />
+
+      </section>
+
+    </div>
+  );
+}
+
+export default Adoption;
