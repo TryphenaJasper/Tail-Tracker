@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { supabase } from "./config/supabase.js";
 import authRoutes from "./routes/authRoutes.js";
+import authMiddleware from './middleware/authMiddleware.js';
 
 dotenv.config();
 
@@ -43,5 +44,12 @@ app.get("/test-supabase", async (req, res) => {
     res.json({
         message: "Supabase connection successful!",
         data: data
+    });
+});
+
+app.get('/api/protected', authMiddleware, (req, res) => {
+    res.json({
+        message: 'You are authenticated!',
+        user: req.user
     });
 });
