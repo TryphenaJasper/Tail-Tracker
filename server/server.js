@@ -5,6 +5,7 @@ import { supabase } from "./config/supabase.js";
 import authRoutes from "./routes/authRoutes.js";
 import authMiddleware from './middleware/authMiddleware.js';
 import animalsRoutes from './routes/animals.js';
+import adoptionRequestsRoutes from './routes/adoptionRequests.js';
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use('/api/animals', animalsRoutes);
+app.use('/api/adoptions', adoptionRequestsRoutes);
 
 
 app.get("/", (req, res) => {

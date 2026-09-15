@@ -194,8 +194,8 @@ router.put('/:id', authMiddleware, async (req, res) => {
             image_url,
             status
         } = req.body;
-
-        const { data, error } = await supabase
+        const userSupabase = getSupabaseClient(req.token);
+        const { data, error } = await userSupabase
             .from('animals')
             .update({
                 name,
@@ -244,8 +244,8 @@ router.put('/:id', authMiddleware, async (req, res) => {
 router.delete('/:id', authMiddleware, async (req, res) => {
     try {
         const { id } = req.params;
-
-        const { data, error } = await supabase
+        const userSupabase = getSupabaseClient(req.token);
+        const { data, error } = await userSupabase
             .from('animals')
             .delete()
             .eq('animal_id', id)
