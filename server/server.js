@@ -6,6 +6,7 @@ import authRoutes from "./routes/authRoutes.js";
 import authMiddleware from './middleware/authMiddleware.js';
 import animalsRoutes from './routes/animals.js';
 import adoptionRequestsRoutes from './routes/adoptionRequests.js';
+import rescueReportsRouter from './routes/rescueReports.js';
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use('/api/animals', animalsRoutes);
 app.use('/api/adoptions', adoptionRequestsRoutes);
+app.use('/api/rescue-reports', rescueReportsRouter);
 
 
 app.get("/", (req, res) => {
