@@ -5,7 +5,7 @@ import AnimalDetails from "./pages/AnimalDetails.jsx";
 import Rescue from "./pages/Rescue.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Account from "./pages/Account.jsx";
-
+import Login from "./pages/Login.jsx";
 
 function App() {
   return (
@@ -17,6 +17,7 @@ function App() {
         <Route path="/adoption/:id" element={<AnimalDetails />} />
          <Route path="/rescue" element={<Rescue />} />
          <Route path="/account" element={<Account/>}></Route>
+         <Route path="/login" element={<Login />} />
         
       </Routes>
     </BrowserRouter>

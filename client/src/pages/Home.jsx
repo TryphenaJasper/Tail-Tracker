@@ -1,9 +1,32 @@
-import { Link } from "react-router-dom";
+import { Link,useLocation,useNavigate  } from "react-router-dom";
 import "../styles/home.css";
+import { useEffect } from "react";
+
+
+
 
 function Home() {
+  const location = useLocation();
+const navigate = useNavigate();
+
+useEffect(() => {
+  if (location.state?.message) {
+    const timer = setTimeout(() => {
+      
+      navigate("/", { replace: true, state: {} });
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }
+}, [location, navigate]);
+  
   return (
     <div className="home">
+      {location.state?.message && (
+  <div className="logout-message">
+    ✓ {location.state.message}
+  </div>
+)}
 
       {/* ================= HERO SECTION ================= */}
       <section className="hero">

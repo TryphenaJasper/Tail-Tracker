@@ -434,3 +434,18 @@
     text-align: center;
   }
 }
+
+.logout-message {
+  padding: 12px 20px;
+
+  background: #fff0f4;
+
+  color: #d85b83;
+
+  text-align: center;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  border-bottom: 1px solid #f0e1e6;
+}

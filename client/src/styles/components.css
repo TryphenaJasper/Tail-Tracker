@@ -5,7 +5,7 @@
 .navbar {
   height: 72px;
 
-  padding: 0 7%;
+  padding: 0 5%;
 
   display: flex;
   align-items: center;
@@ -14,12 +14,14 @@
 
   color: #ffffff;
 
-  position: relative;
-  z-index: 1000;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 
-/* Logo */
+/* =================================
+   LOGO
+================================= */
 
 .navbar-logo {
   color: #ffffff;
@@ -33,7 +35,9 @@
 }
 
 
-/* Navigation links */
+/* =================================
+   NAVIGATION LINKS
+================================= */
 
 .navbar-links {
   display: flex;
@@ -60,37 +64,124 @@
 }
 
 
-/* Account */
+/* =================================
+   ACCOUNT CONTAINER
+================================= */
 
-.navbar-account {
+.navbar-account-container {
+  position: relative;
+
   margin-left: auto;
 
   display: flex;
   align-items: center;
-
-  gap: 9px;
-
-  color: #ffffff;
-
-  text-decoration: none;
-
-  font-size: 0.95rem;
-  font-weight: 600;
 }
 
-.user-circle {
-  width: 36px;
-  height: 36px;
+
+/* =================================
+   PROFILE BUTTON
+================================= */
+
+.navbar-account-button {
+  width: 44px;
+  height: 44px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background-color: #f7c7d7;
+  padding: 0;
 
+  border: none;
   border-radius: 50%;
 
-  font-size: 1.05rem;
+  background-color: #f7c7d7;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.navbar-account-button:hover {
+  background-color: #f7c7d7;
+}
+
+
+/* Profile icon */
+
+.user-circle {
+  font-size: 1.3rem;
+}
+
+
+/* =================================
+   ACCOUNT DROPDOWN
+================================= */
+
+.account-dropdown {
+  position: absolute;
+
+  top: 55px;
+  right: 0;
+
+  width: 180px;
+
+  padding: 8px;
+
+  background: white;
+
+  border: 1px solid #f0e1e6;
+
+  border-radius: 10px;
+
+  box-shadow: 0 10px 30px rgba(80, 40, 50, 0.12);
+
+  z-index: 1000;
+}
+
+
+/* =================================
+   DROPDOWN ITEMS
+================================= */
+
+.dropdown-item {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  padding: 11px 12px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #292329;
+
+  font-family: inherit;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background: #fff0f4;
+
+  color: #d85b83;
+}
+
+.logout-item {
+  color: #756b70;
 }
 
 
@@ -106,6 +197,7 @@
 
   .navbar-links {
     gap: 18px;
+
     margin-left: 25px;
   }
 
@@ -113,12 +205,16 @@
     font-size: 0.85rem;
   }
 
-  .navbar-account span:last-child {
-    display: none;
+  .navbar-account-button {
+    width: 34px;
+    height: 34px;
   }
 
   .user-circle {
-    width: 34px;
-    height: 34px;
+    font-size: 1.05rem;
+  }
+
+  .account-dropdown {
+    top: 45px;
   }
 }
