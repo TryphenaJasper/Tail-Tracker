@@ -1,0 +1,253 @@
+/* =========================================
+   ADD ANIMAL PAGE
+========================================= */
+
+.add-animal-page {
+  min-height: calc(100vh - 80px);
+  background: #fff7fa;
+  padding: 60px 20px 80px;
+}
+
+.add-animal-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.add-animal-header {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.add-animal-tagline {
+  color: #d4547b;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.add-animal-header h1 {
+  margin: 0;
+  color: #251f25;
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.add-animal-header > p:last-child {
+  color: #6f6268;
+  font-size: 17px;
+  line-height: 1.6;
+  max-width: 650px;
+  margin: 15px auto 0;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.add-animal-form {
+  background: #ffffff;
+  border: 1px solid #f0d9e1;
+  border-radius: 18px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(100, 17, 27, 0.06);
+}
+
+
+/* =========================================
+   FORM SECTIONS
+========================================= */
+
+.form-section {
+  margin-bottom: 38px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #f1e3e7;
+}
+
+.form-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 20px;
+}
+
+.form-section h2 {
+  color: #4a0c13;
+  font-size: 22px;
+  margin: 0 0 22px;
+}
+
+
+/* =========================================
+   FORM ROW
+========================================= */
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+
+/* =========================================
+   FORM GROUP
+========================================= */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  color: #342b30;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #e7cfd7;
+  border-radius: 10px;
+  background: #fffafd;
+  padding: 13px 14px;
+  font-family: inherit;
+  font-size: 15px;
+  color: #342b30;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input,
+.form-group select {
+  height: 48px;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #d4547b;
+  box-shadow: 0 0 0 3px rgba(212, 84, 123, 0.1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #a99ca2;
+}
+
+.form-group small {
+  color: #8d7e85;
+  font-size: 12px;
+  margin-top: 7px;
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.add-animal-error {
+  background: #fff0f2;
+  border: 1px solid #f0c5ce;
+  color: #a52b3f;
+  border-radius: 9px;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.cancel-button,
+.submit-animal-button {
+  border: none;
+  border-radius: 10px;
+  padding: 13px 22px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.cancel-button {
+  background: #f8eef2;
+  color: #64111b;
+}
+
+.cancel-button:hover {
+  background: #f1dfe6;
+}
+
+.submit-animal-button {
+  background: #d4547b;
+  color: white;
+}
+
+.submit-animal-button:hover {
+  background: #c4476d;
+  transform: translateY(-1px);
+}
+
+.submit-animal-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .add-animal-page {
+    padding: 40px 15px 60px;
+  }
+
+  .add-animal-header h1 {
+    font-size: 32px;
+  }
+
+  .add-animal-form {
+    padding: 25px 20px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .cancel-button,
+  .submit-animal-button {
+    width: 100%;
+  }
+}

@@ -1,8 +1,15 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/adoption.css";
 import AnimalList from "../components/AnimalList.jsx";
 
 function Adoption() {
+  const [search, setSearch] = useState("");
+  const [species, setSpecies] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [location, setLocation] = useState("");
+
   return (
     <div className="adoption-page">
 
@@ -40,38 +47,44 @@ function Adoption() {
           <input
             type="text"
             placeholder="Search by name, breed or location..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
 
-        <select defaultValue="">
-          <option value="" disabled>
-            Species
-          </option>
+        <select
+          value={species}
+          onChange={(e) => setSpecies(e.target.value)}
+        >
+          <option value="">Species</option>
           <option value="dog">Dog</option>
           <option value="cat">Cat</option>
         </select>
 
-        <select defaultValue="">
-          <option value="" disabled>
-            Age
-          </option>
+        <select
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+        >
+          <option value="">Age</option>
           <option value="young">Young</option>
           <option value="adult">Adult</option>
           <option value="senior">Senior</option>
         </select>
 
-        <select defaultValue="">
-          <option value="" disabled>
-            Gender
-          </option>
+        <select
+          value={gender}
+          onChange={(e) => setGender(e.target.value)}
+        >
+          <option value="">Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
 
-        <select defaultValue="">
-          <option value="" disabled>
-            Location
-          </option>
+        <select
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        >
+          <option value="">Location</option>
           <option value="chennai">Chennai</option>
           <option value="coimbatore">Coimbatore</option>
           <option value="madurai">Madurai</option>
@@ -91,7 +104,13 @@ function Adoption() {
           </p>
         </div>
 
-        <AnimalList />
+        <AnimalList
+          search={search}
+          species={species}
+          age={age}
+          gender={gender}
+          location={location}
+        />
 
       </section>
 

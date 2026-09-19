@@ -313,3 +313,120 @@
     font-size: 1.5rem;
   }
 }
+
+/* =================================
+   ANIMAL CARDS
+================================= */
+
+.animal-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 28px;
+  margin-top: 30px;
+}
+
+.animal-card {
+  background: #ffffff;
+  border: 1px solid #f0dce3;
+  border-radius: 18px;
+  overflow: hidden;
+  padding-bottom: 20px;
+  box-shadow: 0 6px 20px rgba(100, 17, 27, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.animal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(100, 17, 27, 0.1);
+}
+
+
+/* Animal image */
+
+.animal-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* Animal name */
+
+.animal-card h3 {
+  margin: 18px 20px 6px;
+  font-size: 22px;
+  color: #2b2528;
+}
+
+
+/* Species */
+
+.animal-card > p {
+  margin: 0 20px 12px;
+  color: #6f6267;
+  font-size: 15px;
+}
+
+
+/* Status */
+
+.animal-card .status {
+  display: inline-block;
+  margin: 0 20px 16px;
+  padding: 5px 11px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  background: #f8e8ee;
+  color: #9b365b;
+}
+
+
+/* Interested button */
+
+.animal-card button {
+  display: block;
+  width: calc(100% - 40px);
+  margin: 4px 20px 0;
+  padding: 11px 16px;
+  border: none;
+  border-radius: 9px;
+  background: #d9567d;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.animal-card button:hover {
+  background: #c7476d;
+  transform: translateY(-1px);
+}
+
+.animal-card button:disabled {
+  background: #d8b9c3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+/* Success message */
+
+.success-message {
+  margin: 12px 20px 0 !important;
+  color: #47705a !important;
+  font-size: 14px !important;
+  font-weight: 500;
+}
+
+
+/* Error message */
+
+.error-message {
+  margin: 12px 20px 0 !important;
+  color: #b33a4b !important;
+  font-size: 14px !important;
+  font-weight: 500;
+}
