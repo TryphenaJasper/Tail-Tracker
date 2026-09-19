@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { supabase } from "../services/supabaseClient";
+import { useNavigate } from "react-router-dom";
 import "../styles/adoption.css";
 import AnimalList from "../components/AnimalList.jsx";
 
@@ -9,6 +11,17 @@ function Adoption() {
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
   const [location, setLocation] = useState("");
+  const navigate = useNavigate();
+
+  const handleAddAnimal = async () => {
+  const { data } = await supabase.auth.getSession();
+
+  if (data.session) {
+    navigate("/adoption/add");
+  } else {
+    navigate("/login");
+  }
+};
 
   return (
     <div className="adoption-page">
@@ -31,9 +44,12 @@ function Adoption() {
           </p>
         </div>
 
-        <Link to="/adoption/add" className="add-animal-btn">
+        <button
+           onClick={handleAddAnimal}
+          className="add-animal-btn"
+          >
           + Put an Animal for Adoption
-        </Link>
+        </button>
 
       </section>
 

@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar.jsx";
 import Account from "./pages/Account.jsx";
 import Login from "./pages/Login.jsx";
 import AddAnimal from "./pages/AddAnimal.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App() {
   return (
@@ -19,7 +20,15 @@ function App() {
          <Route path="/rescue" element={<Rescue />} />
          <Route path="/account" element={<Account/>}></Route>
          <Route path="/login" element={<Login />} />
-         <Route path="/adoption/add" element={<AddAnimal />} />
+         
+         <Route
+            path="/adoption/add"
+            element={
+            <ProtectedRoute>
+                <AddAnimal />
+            </ProtectedRoute>
+          }
+        />
         
       </Routes>
     </BrowserRouter>

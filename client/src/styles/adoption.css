@@ -64,39 +64,6 @@
   line-height: 1.7;
 }
 
-
-/* =================================
-   ADD ANIMAL BUTTON
-================================= */
-
-.add-animal-btn {
-  flex-shrink: 0;
-
-  padding: 14px 22px;
-
-  background-color: #d85b83;
-
-  color: #ffffff;
-
-  border-radius: 8px;
-
-  font-weight: 600;
-
-  transition:
-    background-color 0.25s ease,
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-.add-animal-btn:hover {
-  background-color: #c94f77;
-
-  transform: translateY(-2px);
-
-  box-shadow: 0 8px 20px rgba(216, 91, 131, 0.18);
-}
-
-
 /* =================================
    SEARCH & FILTERS
 ================================= */
@@ -277,12 +244,6 @@
     font-size: 3rem;
   }
 
-  .add-animal-btn {
-    width: 100%;
-
-    text-align: center;
-  }
-
   .adoption-filters {
     margin-left: 6%;
     margin-right: 6%;
@@ -312,6 +273,51 @@
   .animals-section-heading h2 {
     font-size: 1.5rem;
   }
+}
+/* =================================
+   ADD ANIMAL BUTTON
+================================= */
+
+.add-animal-btn {
+  flex-shrink: 0;
+
+  padding: 14px 22px;
+
+  background-color: #d85b83;
+  color: #ffffff;
+
+  border: none;
+  outline: none;
+  box-shadow: none;
+
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.add-animal-btn:hover {
+  background-color: #c94f77;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(216, 91, 131, 0.18);
+}
+
+.add-animal-btn:focus,
+.add-animal-btn:focus-visible,
+.add-animal-btn:active {
+  border: none;
+  outline: none;
+  box-shadow: none;
 }
 
 /* =================================
@@ -430,3 +436,4 @@
   font-size: 14px !important;
   font-weight: 500;
 }
+

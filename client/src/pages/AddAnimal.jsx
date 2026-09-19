@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createAnimal } from "../services/animalService.js";
+import { uploadImage } from "../services/cloudinaryService.js";
 import "../styles/addAnimal.css";
 
 function AddAnimal() {
   const navigate = useNavigate();
-
+  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     species: "",
@@ -18,7 +20,7 @@ function AddAnimal() {
     longitude: "",
     health_status: "",
     health_issues: "",
-    image_url: "",
+    
   });
 
   const [loading, setLoading] = useState(false);
@@ -39,21 +41,28 @@ function AddAnimal() {
     setError("");
     setLoading(true);
 
-    try {
-      await createAnimal({
-        ...formData,
-        age: Number(formData.age),
-        latitude: formData.latitude
-          ? Number(formData.latitude)
-          : null,
-        longitude: formData.longitude
-          ? Number(formData.longitude)
-          : null,
-        status: "available",
-      });
+   try {
+  let imageUrl = null;
 
-      navigate("/adoption");
-    } catch (err) {
+  if (image) {
+    imageUrl = await uploadImage(image);
+  }
+
+  await createAnimal({
+    ...formData,
+    image_url: imageUrl,
+    age: Number(formData.age),
+    latitude: formData.latitude
+      ? Number(formData.latitude)
+      : null,
+    longitude: formData.longitude
+      ? Number(formData.longitude)
+      : null,
+    status: "available",
+  });
+
+  navigate("/adoption");
+} catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
@@ -281,28 +290,39 @@ function AddAnimal() {
           </div>
 
 
+          
           {/* IMAGE */}
-          <div className="form-section">
+<div className="form-section">
 
-            <h2>Animal Photo</h2>
+  <h2>Animal Photo</h2>
 
-            <div className="form-group">
-              <label>Image URL</label>
+  <div className="form-group">
+    <label>Choose a photo</label>
 
-              <input
-                type="url"
-                name="image_url"
-                value={formData.image_url}
-                onChange={handleChange}
-                placeholder="https://example.com/animal.jpg"
-              />
+    <input
+      type="file"
+      accept="image/*"
+      onChange={(e) => {
+        const file = e.target.files[0];
 
-              <small>
-                Add a publicly accessible image URL.
-              </small>
-            </div>
+        if (file) {
+          setImage(file);
+          setImagePreview(URL.createObjectURL(file));
+        }
+      }}
+    />
+  </div>
 
-          </div>
+  {imagePreview && (
+    <div className="image-preview">
+      <img
+        src={imagePreview}
+        alt="Animal preview"
+      />
+    </div>
+  )}
+
+</div>
 
 
           {error && (
