@@ -1,3 +1,4 @@
+
 import { supabase } from "./supabaseClient";
 
 const BASE_URL = "/api/adoptions";
@@ -18,13 +19,12 @@ const getAuthHeaders = async () => {
 };
 
 // Submit a new adoption request
-export const createAdoptionRequest = async (animal_id, message = "") => {
+export const createAdoptionRequest = async (animal_id) => {
   const res = await fetch(BASE_URL, {
     method: "POST",
     headers: await getAuthHeaders(),
     body: JSON.stringify({
       animal_id,
-      message,
     }),
   });
 
@@ -56,13 +56,10 @@ export const getMyAdoptionRequests = async () => {
 
 
 // Update an adoption request
-export const updateAdoptionRequest = async (requestId, message) => {
+export const updateAdoptionRequest = async (requestId) => {
   const res = await fetch(`${BASE_URL}/${requestId}`, {
     method: "PUT",
     headers: await getAuthHeaders(),
-    body: JSON.stringify({
-      message,
-    }),
   });
 
   const data = await res.json();

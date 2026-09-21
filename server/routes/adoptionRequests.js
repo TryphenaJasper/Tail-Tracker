@@ -1,3 +1,4 @@
+
 import express from 'express';
 import { createClient } from '@supabase/supabase-js';
 import authMiddleware from '../middleware/authMiddleware.js';
@@ -22,7 +23,7 @@ const getSupabaseClient = (token) => {
 // Create an adoption request
 router.post('/', authMiddleware, async (req, res) => {
     try {
-        const { animal_id, message } = req.body;
+        const { animal_id } = req.body;
 
         if (!animal_id) {
             return res.status(400).json({
@@ -79,7 +80,6 @@ router.post('/', authMiddleware, async (req, res) => {
             .insert({
                 animal_id,
                 user_id: req.user.id,
-                message: message || null,
                 status: 'pending'
             })
             .select()
@@ -157,29 +157,14 @@ router.get('/my', authMiddleware, async (req, res) => {
 router.put('/:id', authMiddleware, async (req, res) => {
     try {
         const { id } = req.params;
-        const { message } = req.body;
 
         const userSupabase = getSupabaseClient(req.token);
 
-        const { data, error } = await userSupabase
-            .from('adoption_requests')
-            .update({
-                message
-            })
-            .eq('request_id', id)
-            .eq('user_id', req.user.id)
-            .select()
-            .single();
+        // There is currently nothing to update because
+        // the message column has been removed.
 
-        if (error || !data) {
-            return res.status(404).json({
-                error: 'Adoption request not found'
-            });
-        }
-
-        res.status(200).json({
-            message: 'Adoption request updated successfully',
-            request: data
+        return res.status(400).json({
+            error: 'Adoption requests cannot be edited'
         });
 
     } catch (error) {
@@ -234,3 +219,4 @@ router.delete('/:id', authMiddleware, async (req, res) => {
 
 
 export default router;
+

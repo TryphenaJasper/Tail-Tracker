@@ -1,13 +1,20 @@
-function AnimalDetails() {
+import "../styles/rescue.css";
+
+function Rescue() {
   return (
-    <div className="animal-details-page">
-      <h1>Animal Details 🐾</h1>
+    <div className="rescue-page">
+      <h1>Rescue an Animal 🏥</h1>
 
       <p>
-        Information about the selected animal will appear here.
+        Found a sick or injured animal? We'll help you find
+        nearby veterinary care.
       </p>
+
+      <button>
+        Find Nearby Vets
+      </button>
     </div>
   );
 }
 
-export default AnimalDetails;
+export default Rescue;
