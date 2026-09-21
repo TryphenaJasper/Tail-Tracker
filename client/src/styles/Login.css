@@ -244,3 +244,12 @@
     font-size: 1.7rem;
   }
 }
+.login-success {
+  margin: -5px 0 0;
+  padding: 10px 12px;
+  border-radius: 7px;
+  background: #f0fff4;
+  color: #287a45;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
