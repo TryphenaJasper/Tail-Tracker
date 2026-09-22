@@ -8,9 +8,17 @@ function Account() {
   const [user, setUser] = useState(null);
   const [listings, setListings] = useState([]);
 
-  // ADDED: Adoption requests made by this user
+  // Adoption requests made by this user
   const [requestedAnimals, setRequestedAnimals] = useState([]);
   const [requestsLoading, setRequestsLoading] = useState(true);
+
+  // Adoption requests received for animals I listed
+  const [receivedRequests, setReceivedRequests] = useState([]);
+  const [receivedRequestsLoading, setReceivedRequestsLoading] =
+    useState(true);
+
+  // Track which requester details are expanded
+  const [expandedRequests, setExpandedRequests] = useState([]);
 
   const [loading, setLoading] = useState(true);
   const [listingsLoading, setListingsLoading] = useState(true);
@@ -30,6 +38,7 @@ function Account() {
         setUser(null);
         setListings([]);
         setRequestedAnimals([]);
+        setReceivedRequests([]);
         setLoading(false);
       }
     });
@@ -60,6 +69,7 @@ function Account() {
         setUser(null);
         setListings([]);
         setRequestedAnimals([]);
+        setReceivedRequests([]);
         return;
       }
 
@@ -151,16 +161,114 @@ function Account() {
       } else {
         setRequestedAnimals(userRequests || []);
       }
+
+      // =================================================
+      // GET ADOPTION REQUESTS FOR MY LISTINGS
+      // =================================================
+
+      setReceivedRequestsLoading(true);
+
+      const myAnimalIds = (userListings || []).map(
+        (animal) => animal.animal_id
+      );
+
+      if (myAnimalIds.length === 0) {
+        setReceivedRequests([]);
+      } else {
+        const {
+          data: incomingRequests,
+          error: incomingRequestsError,
+        } = await supabase
+          .from("adoption_requests")
+          .select(
+            `
+            request_id,
+            animal_id,
+            user_id,
+            status,
+            created_at
+          `
+          )
+          .in("animal_id", myAnimalIds)
+          .order("created_at", { ascending: false });
+
+        console.log(
+          "RECEIVED ADOPTION REQUESTS:",
+          incomingRequests
+        );
+        console.log(
+          "RECEIVED REQUESTS ERROR:",
+          incomingRequestsError
+        );
+
+        if (incomingRequestsError) {
+          console.error(
+            "Received adoption requests error:",
+            incomingRequestsError
+          );
+          setReceivedRequests([]);
+        } else {
+          // Get only name, phone and email of requesters
+          // through the secure RPC function.
+          const {
+            data: requesterProfiles,
+            error: requesterError,
+          } = await supabase.rpc("get_my_adoption_requesters");
+
+          console.log(
+            "REQUESTER PROFILES:",
+            requesterProfiles
+          );
+          console.log(
+            "REQUESTER PROFILES ERROR:",
+            requesterError
+          );
+
+          if (requesterError) {
+            console.error(
+              "Requester profiles error:",
+              requesterError
+            );
+          }
+
+          const requestsWithUsers = (incomingRequests || []).map(
+            (request) => ({
+              ...request,
+              requester:
+                (requesterProfiles || []).find(
+                  (profile) =>
+                    profile.request_id === request.request_id
+                ) || null,
+            })
+          );
+
+          setReceivedRequests(requestsWithUsers);
+        }
+      }
     } catch (error) {
       console.error("Unexpected account error:", error);
       setUser(null);
       setListings([]);
       setRequestedAnimals([]);
+      setReceivedRequests([]);
     } finally {
       setLoading(false);
       setListingsLoading(false);
       setRequestsLoading(false);
+      setReceivedRequestsLoading(false);
     }
+  };
+
+  // =====================================================
+  // TOGGLE REQUESTER DETAILS
+  // =====================================================
+
+  const toggleRequestDetails = (requestId) => {
+    setExpandedRequests((current) =>
+      current.includes(requestId)
+        ? current.filter((id) => id !== requestId)
+        : [...current, requestId]
+    );
   };
 
   // =====================================================
@@ -367,98 +475,201 @@ function Account() {
 
             ) : (
 
-              listings.map((animal) => (
+              listings.map((animal) => {
 
-                <div
-                  className="profile-listing"
-                  key={animal.animal_id}
-                >
+                const animalRequests = receivedRequests.filter(
+                  (request) =>
+                    request.animal_id === animal.animal_id
+                );
 
-                  <div className="listing-animal">
+                return (
 
-                    <div className="listing-emoji">
+                  <div
+                    className="profile-listing"
+                    key={animal.animal_id}
+                  >
 
-                      {animal.species?.toLowerCase() === "cat"
-                        ? "🐈"
-                        : "🐕"}
+                    <div className="listing-animal">
 
-                    </div>
+                      <div className="listing-emoji">
 
-                    <div>
-
-                      <div className="listing-name-row">
-
-                        <h3>
-                          {animal.name}
-                        </h3>
-
-                        <span
-                          className={`status-badge ${animal.status}`}
-                        >
-
-                          {animal.status === "available" &&
-                            "● Available"}
-
-                          {animal.status === "adopted" &&
-                            "✓ Adopted"}
-
-                          {animal.status !== "available" &&
-                            animal.status !== "adopted" &&
-                            animal.status}
-
-                        </span>
+                        {animal.species?.toLowerCase() === "cat"
+                          ? "🐈"
+                          : "🐕"}
 
                       </div>
 
-                      <p>
-                        {animal.species}
-                        {" · "}
-                        {animal.breed}
-                        {" · "}
-                        {animal.age} years
-                      </p>
+                      <div>
 
-                      {animal.location && (
-                        <span className="listing-location">
-                          📍 {animal.location}
-                        </span>
-                      )}
+                        <div className="listing-name-row">
+
+                          <h3>
+                            {animal.name}
+                          </h3>
+
+                          <span
+                            className={`status-badge ${animal.status}`}
+                          >
+
+                            {animal.status === "available" &&
+                              "● Available"}
+
+                            {animal.status === "adopted" &&
+                              "✓ Adopted"}
+
+                            {animal.status !== "available" &&
+                              animal.status !== "adopted" &&
+                              animal.status}
+
+                          </span>
+
+                        </div>
+
+                        <p>
+                          {animal.species}
+                          {" · "}
+                          {animal.breed}
+                          {" · "}
+                          {animal.age} years
+                        </p>
+
+                        {animal.location && (
+                          <span className="listing-location">
+                            📍 {animal.location}
+                          </span>
+                        )}
+
+                      </div>
 
                     </div>
+
+                    {/* ================= ADOPTION REQUESTS ================= */}
+
+                    {animal.status === "available" && (
+                      <div className="received-requests">
+
+                        <h4>Adoption Requests</h4>
+
+                        {receivedRequestsLoading ? (
+
+                          <p>Loading requests...</p>
+
+                        ) : animalRequests.length === 0 ? (
+
+                          <p>No adoption requests yet.</p>
+
+                        ) : (
+
+                          animalRequests.map((request) => {
+
+                            const isExpanded =
+                              expandedRequests.includes(
+                                request.request_id
+                              );
+
+                            return (
+
+                              <div
+                                className="received-request"
+                                key={request.request_id}
+                              >
+
+                                <div>
+
+                                  <div className="listing-name-row">
+
+                                    <strong>
+                                      {request.requester?.name ||
+                                        "Unknown User"}
+                                    </strong>
+
+                                  </div>
+
+                                  {/* VIEW DETAILS */}
+
+                                  <button
+                                    className="view-details-btn"
+                                    onClick={() =>
+                                      toggleRequestDetails(
+                                        request.request_id
+                                      )
+                                    }
+                                  >
+                                    {isExpanded
+                                      ? "Hide Details"
+                                      : "View Details"}
+                                  </button>
+
+                                  {isExpanded && (
+                                    <div className="requester-details">
+
+                                      <p>
+                                        <strong>Name:</strong>{" "}
+                                        {request.requester?.name ||
+                                          "Not available"}
+                                      </p>
+
+                                      <p>
+                                        <strong>Contact:</strong>{" "}
+                                        {request.requester?.phone ||
+                                          "Not available"}
+                                      </p>
+
+                                      <p>
+                                        <strong>Email:</strong>{" "}
+                                        {request.requester?.email ||
+                                          "Not available"}
+                                      </p>
+
+                                    </div>
+                                  )}
+
+                                </div>
+
+                              </div>
+
+                            );
+
+                          })
+
+                        )}
+
+                      </div>
+                    )}
+
+                    {/* ================= ACTIONS ================= */}
+
+                    {animal.status === "available" && (
+
+                      <div className="listing-actions">
+
+                        <button
+                          className="adopted-btn"
+                          onClick={() =>
+                            handleMarkAdopted(animal.animal_id)
+                          }
+                        >
+                          Mark as Adopted
+                        </button>
+
+                        <button
+                          className="remove-btn"
+                          onClick={() =>
+                            handleRemoveListing(animal.animal_id)
+                          }
+                        >
+                          Remove Listing
+                        </button>
+
+                      </div>
+
+                    )}
 
                   </div>
 
-                  {/* ================= ACTIONS ================= */}
+                );
 
-                  {animal.status === "available" && (
-
-                    <div className="listing-actions">
-
-                      <button
-                        className="adopted-btn"
-                        onClick={() =>
-                          handleMarkAdopted(animal.animal_id)
-                        }
-                      >
-                        Mark as Adopted
-                      </button>
-
-                      <button
-                        className="remove-btn"
-                        onClick={() =>
-                          handleRemoveListing(animal.animal_id)
-                        }
-                      >
-                        Remove Listing
-                      </button>
-
-                    </div>
-
-                  )}
-
-                </div>
-
-              ))
+              })
 
             )}
 
@@ -527,26 +738,6 @@ function Account() {
                             {animal?.name}
                           </h3>
 
-                          <span
-                            className={`status-badge ${request.status}`}
-                          >
-
-                            {request.status === "pending" &&
-                              "● Pending"}
-
-                            {request.status === "approved" &&
-                              "✓ Approved"}
-
-                            {request.status === "rejected" &&
-                              "✕ Rejected"}
-
-                            {!["pending", "approved", "rejected"].includes(
-                              request.status
-                            ) &&
-                              request.status}
-
-                          </span>
-
                         </div>
 
                         <p>
@@ -601,4 +792,3 @@ function Account() {
 }
 
 export default Account;
-

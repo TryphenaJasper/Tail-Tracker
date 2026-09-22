@@ -360,3 +360,20 @@
     flex: 1;
   }
 }
+.view-details-btn {
+  background: transparent;
+  border: 1px solid #64111B;
+  color: #64111B;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.2s ease;
+}
+
+.view-details-btn:hover {
+  background: #64111B;
+  color: white;
+}
