@@ -1,11 +1,14 @@
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { createAdoptionRequest } from "../services/adoptionService.js";
 
 function AnimalCard({ animal }) {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   const handleInterested = async () => {
     setLoading(true);
@@ -23,6 +26,10 @@ function AnimalCard({ animal }) {
     }
   };
 
+  const handleViewDetails = () => {
+    navigate(`/adoption/${animal.animal_id}`);
+  };
+
   return (
     <div className="animal-card">
 
@@ -37,6 +44,13 @@ function AnimalCard({ animal }) {
       <span className={`status status-${animal.status}`}>
         {animal.status}
       </span>
+
+      <button
+        type="button"
+        onClick={handleViewDetails}
+      >
+        View More Details
+      </button>
 
       <button
         type="button"
