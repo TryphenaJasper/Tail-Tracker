@@ -1,0 +1,323 @@
+/* ================================
+   RESCUE PAGE
+================================ */
+
+.rescue-page {
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+
+/* ================================
+   HERO
+================================ */
+
+.rescue-hero {
+  padding: 70px 20px 50px;
+  text-align: center;
+}
+
+.rescue-hero h1 {
+  margin: 0 0 14px;
+  font-size: 2.5rem;
+  color: #64111b;
+}
+
+.rescue-hero p {
+  max-width: 650px;
+  margin: 0 auto;
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+
+/* ================================
+   SECTIONS
+================================ */
+
+.rescue-form-section,
+.my-reports-section {
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto 40px;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+}
+
+.rescue-form-section h2,
+.my-reports-section h2 {
+  margin: 0 0 24px;
+  color: #64111b;
+  font-size: 1.5rem;
+}
+
+
+/* ================================
+   FORM
+================================ */
+
+.rescue-form-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #4a0c13;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #c91545;
+  box-shadow: 0 0 0 3px rgba(201, 21, 69, 0.08);
+}
+
+
+/* ================================
+   LATITUDE / LONGITUDE
+================================ */
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+
+/* ================================
+   SUBMIT BUTTON
+================================ */
+
+.rescue-form-section button[type="submit"] {
+  width: fit-content;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #64111b;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.rescue-form-section button[type="submit"]:hover {
+  background: #4a0c13;
+  transform: translateY(-1px);
+}
+
+.rescue-form-section button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+/* ================================
+   SUCCESS / ERROR
+================================ */
+
+.error-message,
+.success-message {
+  padding: 12px 14px;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  font-size: 0.9rem;
+}
+
+.error-message {
+  background: #fce8ec;
+  color: #8f1831;
+}
+
+.success-message {
+  background: #f1f8f3;
+  color: #356b43;
+}
+
+
+/* ================================
+   REPORT LIST
+================================ */
+
+.rescue-reports-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+
+/* ================================
+   REPORT CARD
+================================ */
+
+.rescue-report-card {
+  padding: 22px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  background: #fafafa;
+}
+
+.report-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.report-header h3 {
+  margin: 0;
+  color: #4a0c13;
+  font-size: 1.1rem;
+}
+
+.rescue-report-card p {
+  margin: 8px 0;
+  color: #555;
+  line-height: 1.5;
+}
+
+.rescue-report-card strong {
+  color: #4a0c13;
+}
+
+
+/* ================================
+   SEVERITY BADGE
+================================ */
+
+.severity-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.severity-badge.low {
+  background: #eee;
+  color: #555;
+}
+
+.severity-badge.medium {
+  background: #f8f1f3;
+  color: #64111b;
+}
+
+.severity-badge.high {
+  background: #fce8ec;
+  color: #9b1c38;
+}
+
+.severity-badge.critical {
+  background: #64111b;
+  color: #fff;
+}
+
+
+/* ================================
+   REPORT IMAGE
+================================ */
+
+.report-image {
+  display: block;
+  width: 100%;
+  max-width: 350px;
+  max-height: 250px;
+  object-fit: cover;
+  margin-top: 15px;
+  border-radius: 10px;
+}
+
+
+/* ================================
+   DELETE BUTTON
+================================ */
+
+.delete-report-btn {
+  margin-top: 18px;
+  padding: 9px 16px;
+  border: 1px solid #c91545;
+  border-radius: 7px;
+  background: transparent;
+  color: #c91545;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease,
+    color 0.2s ease;
+}
+
+.delete-report-btn:hover {
+  background: #c91545;
+  color: white;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 700px) {
+
+  .rescue-hero {
+    padding: 50px 20px 35px;
+  }
+
+  .rescue-hero h1 {
+    font-size: 2rem;
+  }
+
+  .rescue-form-section,
+  .my-reports-section {
+    width: 88%;
+    padding: 22px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .report-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+}

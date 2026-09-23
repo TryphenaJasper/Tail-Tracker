@@ -29,6 +29,7 @@ const getSupabaseClient = (token) => {
 router.post('/', authMiddleware, async (req, res) => {
     try {
         const {
+            animal_type,
             animal_id,
             description,
             location,
@@ -53,6 +54,7 @@ router.post('/', authMiddleware, async (req, res) => {
             .from('rescue_reports')
             .insert({
                 user_id: req.user.id,
+                animal_type: animal_type || null,
                 animal_id: animal_id || null,
                 description,
                 location,
@@ -209,6 +211,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
         const { id } = req.params;
 
         const {
+             animal_type,
             description,
             location,
             latitude,
@@ -222,6 +225,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
         const { data, error } = await userSupabase
             .from('rescue_reports')
             .update({
+                animal_type,
                 description,
                 location,
                 latitude,
