@@ -1,6 +1,9 @@
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  getMyRescueReports,
+  deleteRescueReport,
+} from "../services/rescueService";
 import { supabase } from "../services/supabaseClient";
 import "../styles/account.css";
 
@@ -16,6 +19,10 @@ function Account() {
   const [receivedRequests, setReceivedRequests] = useState([]);
   const [receivedRequestsLoading, setReceivedRequestsLoading] =
     useState(true);
+
+  // Rescue reports submitted by this user
+  const [rescueReports, setRescueReports] = useState([]);
+  const [rescueReportsLoading, setRescueReportsLoading] = useState(true);
 
   // Track which requester details are expanded
   const [expandedRequests, setExpandedRequests] = useState([]);
@@ -39,6 +46,7 @@ function Account() {
         setListings([]);
         setRequestedAnimals([]);
         setReceivedRequests([]);
+        setRescueReports([]);
         setLoading(false);
       }
     });
@@ -70,6 +78,7 @@ function Account() {
         setListings([]);
         setRequestedAnimals([]);
         setReceivedRequests([]);
+        setRescueReports([]);
         return;
       }
 
@@ -163,6 +172,22 @@ function Account() {
       }
 
       // =================================================
+      // GET USER'S RESCUE REPORTS
+      // =================================================
+
+      setRescueReportsLoading(true);
+
+      try {
+        const rescueData = await getMyRescueReports();
+        setRescueReports(rescueData?.reports || []);
+      } catch (rescueError) {
+        console.error("Rescue reports error:", rescueError);
+        setRescueReports([]);
+      } finally {
+        setRescueReportsLoading(false);
+      }
+
+      // =================================================
       // GET ADOPTION REQUESTS FOR MY LISTINGS
       // =================================================
 
@@ -251,11 +276,13 @@ function Account() {
       setListings([]);
       setRequestedAnimals([]);
       setReceivedRequests([]);
+      setRescueReports([]);
     } finally {
       setLoading(false);
       setListingsLoading(false);
       setRequestsLoading(false);
       setReceivedRequestsLoading(false);
+      setRescueReportsLoading(false);
     }
   };
 
@@ -366,6 +393,32 @@ function Account() {
       currentRequests.filter(
         (request) => request.request_id !== requestId
       )
+    );
+  };
+
+  // =====================================================
+  // DELETE RESCUE REPORT
+  // =====================================================
+
+  const handleDeleteRescueReport = async (reportId) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this rescue report?"
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    const { error } = await deleteRescueReport(reportId);
+
+    if (error) {
+      console.error("Error deleting rescue report:", error);
+      alert("Could not delete the rescue report.");
+      return;
+    }
+
+    setRescueReports((currentReports) =>
+      currentReports.filter((report) => report.report_id !== reportId)
     );
   };
 
@@ -778,6 +831,107 @@ function Account() {
                 );
 
               })
+
+            )}
+
+          </div>
+
+        </section>
+
+        {/* ================= MY RESCUE REPORTS ================= */}
+
+        <section className="profile-section">
+
+          <div className="section-title-row">
+
+            <div>
+
+              <h2>My Rescue Reports</h2>
+
+              <p>
+                Rescue reports you have submitted.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div className="profile-listings">
+
+            {rescueReportsLoading ? (
+
+              <p>Loading your rescue reports...</p>
+
+            ) : rescueReports.length === 0 ? (
+
+              <p>
+                You haven't submitted any rescue reports yet.
+              </p>
+
+            ) : (
+
+              <div className="rescue-reports-list">
+
+                {rescueReports.map((report) => (
+
+                  <div
+                    className="rescue-report-card"
+                    key={report.report_id}
+                  >
+
+                    <div className="report-header">
+
+                      <h3>
+                        {report.animal_type
+                          ? `${report.animal_type} Rescue Report`
+                          : "Rescue Report"}
+                      </h3>
+
+                      <span
+                        className={`severity-badge ${report.severity}`}
+                      >
+                        {report.severity}
+                      </span>
+
+                    </div>
+
+                    <p>
+                      <strong>Location:</strong>{" "}
+                      {report.location}
+                    </p>
+
+                    <p>
+                      <strong>Description:</strong>{" "}
+                      {report.description}
+                    </p>
+
+                    <p>
+                      <strong>Status:</strong>{" "}
+                      {report.status}
+                    </p>
+
+                    {report.image_url && (
+                      <img
+                        src={report.image_url}
+                        alt="Reported animal"
+                        className="report-image"
+                      />
+                    )}
+
+                    <button
+                      className="delete-report-btn"
+                      onClick={() =>
+                        handleDeleteRescueReport(report.report_id)
+                      }
+                    >
+                      Delete Report
+                    </button>
+
+                  </div>
+
+                ))}
+
+              </div>
 
             )}
 

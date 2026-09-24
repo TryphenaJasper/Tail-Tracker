@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import {
   createRescueReport,
   getRescueReports,
-  deleteRescueReport,
 } from "../services/rescueService";
 import { uploadImage } from "../services/cloudinaryService";
 import "../styles/rescue.css";
@@ -134,35 +133,6 @@ function Rescue() {
       setError(error.message || "Failed to submit rescue report");
     } finally {
       setSubmitting(false);
-    }
-  };
-
-  // =====================================================
-  // DELETE REPORT
-  // =====================================================
-
-  const handleDelete = async (reportId) => {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this rescue report?"
-    );
-
-    if (!confirmed) {
-      return;
-    }
-
-    try {
-      setError("");
-
-      await deleteRescueReport(reportId);
-
-      setReports((currentReports) =>
-        currentReports.filter(
-          (report) => report.report_id !== reportId
-        )
-      );
-    } catch (error) {
-      console.error("Error deleting rescue report:", error);
-      setError(error.message || "Failed to delete rescue report");
     }
   };
 
@@ -428,15 +398,6 @@ function Rescue() {
                   />
                 )}
 
-                <button
-                  className="delete-report-btn"
-                  onClick={() =>
-                    handleDelete(report.report_id)
-                  }
-                >
-                  Delete Report
-                </button>
-
               </div>
 
             ))}
@@ -452,5 +413,4 @@ function Rescue() {
 }
 
 export default Rescue;
-
 
