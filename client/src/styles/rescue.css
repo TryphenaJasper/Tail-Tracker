@@ -321,3 +321,68 @@
   }
 
 }
+
+/* ================================
+   ADD REPORT BUTTON
+================================ */
+
+.add-report-container {
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid #eee;
+  text-align: center;
+}
+
+.add-report-container p {
+  margin-bottom: 18px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.add-report-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #64111b;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.add-report-btn:hover {
+  background: #4a0c13;
+  transform: translateY(-1px);
+}
+
+/* ================================
+   BACK TO REPORTS BUTTON
+================================ */
+
+.back-to-reports-btn {
+  width: fit-content;
+  padding: 10px 18px;
+  border: 1px solid #64111b;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #64111b;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.back-to-reports-btn:hover {
+  background: #f8f1f3;
+}
+
+.back-to-reports-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Keep the form buttons neatly spaced */
+.rescue-form-section form .back-to-reports-btn {
+  margin-top: 0;
+}

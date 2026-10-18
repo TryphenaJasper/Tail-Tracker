@@ -9,6 +9,8 @@ import Login from "./pages/Login.jsx";
 import AddAnimal from "./pages/AddAnimal.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Signup from "./pages/Signup.jsx";
+import AddRescueReport from "./pages/AddRescueReport.jsx";
+
 
 function App() {
   return (
@@ -17,7 +19,20 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/adoption" element={<Adoption />} />
-         <Route path="/rescue" element={<Rescue />} />
+         
+<Route path="/rescue" element={<Rescue />} />
+
+<Route
+  path="/rescue/add"
+  element={
+    <ProtectedRoute>
+      <AddRescueReport />
+    </ProtectedRoute>
+  }
+/>
+
+
+
          <Route path="/account" element={<Account/>}></Route>
          <Route path="/login" element={<Login />} />
          <Route path="/signup" element={<Signup />} />
