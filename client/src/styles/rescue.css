@@ -151,12 +151,19 @@
    SUCCESS / ERROR
 ================================ */
 
+/* ================================
+   SUCCESS / ERROR
+================================ */
+
 .error-message,
 .success-message {
+  box-sizing: border-box;
+  width: 100%;
   padding: 12px 14px;
   border-radius: 8px;
-  margin-bottom: 18px;
+  margin: 0 0 18px;
   font-size: 0.9rem;
+  overflow-wrap: anywhere;
 }
 
 .error-message {
@@ -167,8 +174,27 @@
 .success-message {
   background: #f1f8f3;
   color: #356b43;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
 }
 
+.success-message p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.success-message .add-report-btn {
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  transform: none;
+}
+
+.success-message .add-report-btn:hover {
+  transform: none;
+}
 
 /* ================================
    REPORT LIST
@@ -385,4 +411,30 @@
 /* Keep the form buttons neatly spaced */
 .rescue-form-section form .back-to-reports-btn {
   margin-top: 0;
+}
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.contact-actions a {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background-color: #64111b;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.contact-actions a:hover {
+  background-color: #4a0c13;
+}
+
+.contact-actions a:focus-visible {
+  outline: 2px solid #c91545;
+  outline-offset: 3px;
 }
