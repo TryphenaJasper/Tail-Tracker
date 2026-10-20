@@ -1,7 +1,8 @@
 
 import { supabase } from "./supabaseClient";
 
-const BASE_URL = "/api/adoptions";
+const API_URL = import.meta.env.VITE_API_URL || "";
+const BASE_URL = `${API_URL}/api/adoptions`;
 
 const getAuthHeaders = async () => {
   const {

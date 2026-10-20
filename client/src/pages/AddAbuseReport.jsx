@@ -4,7 +4,8 @@ import { supabase } from "../services/supabaseClient";
 import { uploadImage } from "../services/cloudinaryService";
 import "../styles/rescue.css";
 
-const BASE_URL = "/api/abuse-reports";
+const API_URL = import.meta.env.VITE_API_URL || "";
+const BASE_URL = `${API_URL}/api/abuse-reports`;
 
 const contacts = [
   {

@@ -1,6 +1,7 @@
 import { supabase } from "./supabaseClient";
 
-const BASE_URL = "/api/rescue-reports";
+const API_URL = import.meta.env.VITE_API_URL || "";
+const BASE_URL = `${API_URL}/api/rescue-reports`;
 
 
 // Get all rescue reports

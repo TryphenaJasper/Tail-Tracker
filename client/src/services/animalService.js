@@ -1,6 +1,6 @@
 import { supabase } from "./supabaseClient";
-const BASE_URL = "/api/animals";
-
+const API_URL = import.meta.env.VITE_API_URL || "";
+const BASE_URL = `${API_URL}/api/animals`;
 // Get all animals
 export const getAnimals = async () => {
   const res = await fetch(BASE_URL);
