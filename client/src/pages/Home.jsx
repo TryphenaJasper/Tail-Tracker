@@ -1,6 +1,7 @@
 import { Link,useLocation,useNavigate  } from "react-router-dom";
 import "../styles/home.css";
 import { useEffect } from "react";
+import heroImage from "../assets/tail-tracker.png";
 
 
 
@@ -56,10 +57,11 @@ useEffect(() => {
         </div>
 
         <div className="hero-image">
-          {/* Temporary emoji — replace with an actual image later */}
-          <div className="animal-circle">
-            🐶
-          </div>
+         <img
+            src={heroImage}
+            alt="A rescued dog and cat sitting together"
+            className="hero-animal-image"
+        />
         </div>
       </section>
 
@@ -128,9 +130,9 @@ useEffect(() => {
             </p>
 
             {/* Report page intentionally not linked yet */}
-            <span className="feature-link coming-soon">
-              More coming soon
-            </span>
+            <Link to="/report" className="feature-link">
+                Make a Report →
+            </Link>
           </div>
 
         </div>

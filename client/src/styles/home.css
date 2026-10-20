@@ -115,6 +115,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 0 25px 15px #fff7fa;
 }
 
 .animal-circle {
@@ -448,4 +449,19 @@
   font-weight: 600;
 
   border-bottom: 1px solid #f0e1e6;
+}
+
+.hero-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.hero-animal-image {
+  display: block;
+  width: 100%;
+  max-width: 540px;
+  height: auto;
+  object-fit: contain;
 }
