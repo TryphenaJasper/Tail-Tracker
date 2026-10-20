@@ -96,8 +96,13 @@ function Account() {
       console.log("PROFILE ERROR:", profileError);
 
       if (profileError) {
-        console.error("Profile error:", profileError);
-        setUser(null);
+       console.error("ACCOUNT PROFILE FETCH FAILED:", {
+        message: profileError.message,
+        code: profileError.code,
+        details: profileError.details,
+        hint: profileError.hint,
+      });
+        
         return;
       }
 
