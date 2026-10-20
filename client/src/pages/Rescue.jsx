@@ -85,10 +85,7 @@ function Rescue() {
                   {report.description}
                 </p>
 
-                <p>
-                  <strong>Status:</strong>{" "}
-                  {report.status || "Pending"}
-                </p>
+                
 
                 {report.image_url && (
                   <img

@@ -438,3 +438,152 @@
   outline: 2px solid #c91545;
   outline-offset: 3px;
 }
+
+/* ================================
+   GOOGLE MAPS LOCATION PICKER
+================================ */
+
+.rescue-autocomplete-container {
+  width: 100%;
+  min-width: 0;
+}
+
+.rescue-autocomplete-container gmp-place-autocomplete {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+.current-location-btn {
+  width: fit-content;
+  max-width: 100%;
+  padding: 11px 16px;
+  border: 1px solid #64111b;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #64111b;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.current-location-btn:hover:not(:disabled) {
+  background: #f8f1f3;
+}
+
+.current-location-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.location-help-text {
+  margin: 0;
+  color: #666;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.rescue-location-map {
+  width: 100%;
+  height: 350px;
+  border: 1px solid #eadde0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f8f1f3;
+}
+
+.selected-location {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #f8f1f3;
+  color: #4a0c13;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 700px) {
+  .rescue-location-map {
+    height: 280px;
+  }
+
+  .current-location-btn {
+    width: 100%;
+  }
+}
+/* Nearby veterinary clinic suggestions — append to rescue.css */
+.nearby-vets-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #f8f1f3;
+  border: 1px solid rgba(100, 17, 27, 0.12);
+  border-radius: 16px;
+}
+
+.nearby-vets-section h2 {
+  margin-top: 0;
+  color: #64111b;
+}
+
+.nearby-vets-intro,
+.nearby-vets-status,
+.nearby-vets-message,
+.nearby-vets-disclaimer {
+  line-height: 1.6;
+}
+
+.nearby-vets-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.nearby-vet-card {
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid rgba(100, 17, 27, 0.14);
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(74, 12, 19, 0.06);
+}
+
+.nearby-vet-card h3 {
+  margin: 0 0 0.75rem;
+  color: #64111b;
+}
+
+.nearby-vet-card p {
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+}
+
+.nearby-vet-card a:not(.nearby-vet-directions) {
+  color: #64111b;
+}
+
+.nearby-vet-directions {
+  display: inline-block;
+  margin-top: 0.35rem;
+  padding: 0.65rem 0.9rem;
+  color: #fff;
+  background: #64111b;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.nearby-vet-directions:hover {
+  background: #4a0c13;
+}
+
+.nearby-vets-disclaimer {
+  margin-bottom: 0;
+  color: #5d4a4d;
+  font-size: 0.875rem;
+}
+
+.nearby-vets-message {
+  color: #64111b;
+}
