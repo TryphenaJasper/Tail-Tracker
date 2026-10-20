@@ -5,14 +5,14 @@ import {
   deleteRescueReport,
 } from "../services/rescueService";
 import { supabase } from "../services/supabaseClient";
-import "../styles/account.css";
+import "../styles/Account.css";
 
 function Account() {
   const [user, setUser] = useState(null);
   const [listings, setListings] = useState([]);
 
   // Adoption requests made by this user
-  const [requestedAnimals, setRequestedAnimals] = useState([]);
+  const [requestedAnimals, setReqSuestedAnimals] = useState([]);
   const [requestsLoading, setRequestsLoading] = useState(true);
 
   // Adoption requests received for animals I listed
