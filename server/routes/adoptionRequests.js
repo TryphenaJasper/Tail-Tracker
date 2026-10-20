@@ -36,7 +36,7 @@ router.post('/', authMiddleware, async (req, res) => {
         // Check whether animal exists
         const { data: animal, error: animalError } = await userSupabase
             .from('animals')
-            .select('animal_id, status')
+            .select('animal_id, status, posted_by')
             .eq('animal_id', animal_id)
             .single();
 
@@ -45,6 +45,11 @@ router.post('/', authMiddleware, async (req, res) => {
                 error: 'Animal not found'
             });
         }
+        if (animal.posted_by === req.user.id) {
+            return res.status(403).json({
+                error: 'You cannot adopt an animal you posted yourself'
+            });
+}
 
         // Check whether animal is available
         if (animal.status !== 'available') {
