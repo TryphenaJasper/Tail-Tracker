@@ -12,7 +12,7 @@ function Account() {
   const [listings, setListings] = useState([]);
 
   // Adoption requests made by this user
-  const [requestedAnimals, setReqSuestedAnimals] = useState([]);
+  const [requestedAnimals, setRequestedAnimals] = useState([]);
   const [requestsLoading, setRequestsLoading] = useState(true);
 
   // Adoption requests received for animals I listed
